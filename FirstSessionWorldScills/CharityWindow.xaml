@@ -1,0 +1,106 @@
+﻿<Window x:Class="FirstSessionWorldScills.CharityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FirstSessionWorldScills"
+        mc:Ignorable="d"
+        Title="CharityWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style  TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <DockPanel x:Name="UpperPanel" Background="Gray" Grid.Column="0" Grid.ColumnSpan="9" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Москва, Россия 20 июня 2022" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontFamily="Arial" FontWeight="SemiBold" Grid.Row="1" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Kart Skills 2022" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontFamily="Arial" FontWeight="SemiBold" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Button Name="Cancel" Content="Назад" FontSize="24" FontFamily="Arial" FontWeight="Light" Grid.Row="0" Grid.RowSpan="2" Margin="20, 20, 240 ,20" Click="Cancel_Click" />
+            </Grid>
+        </DockPanel>
+
+        <DockPanel x:Name="DownPanel" Background="Gray" Grid.Row="6" Grid.ColumnSpan="9" >
+            <TextBlock Name="TimeToEvent" Text="Здесь время" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="12" FontWeight="DemiBold" Grid.Row="1"/>
+        </DockPanel>
+
+        <TextBlock Text="Список благотворительных организаций" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+
+        <ListView x:Name="listview" 
+                  xmlns:local="clr-namespace:FirstSessionWorldScills" 
+                  Grid.Column="0" 
+                  Grid.Row="2" 
+                  Grid.ColumnSpan="9" 
+                  Grid.RowSpan="3" 
+                  Margin="50, 0, 50, 25" 
+                  BorderBrush="White" 
+                  BorderThickness="0" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.Resources>
+                <local:ImageConverter x:Key="ImageConverter" />
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <!--DisplayMemberBinding="{Binding Charity_Logo}"-->
+                    <GridViewColumn >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <!--<Grid>
+                                    --><!--<Image Source="{Binding Path=Charity_Logo, Converter={StaticResource ImageConverter} }" Height="50" Width="50"/>--><!--
+                                </Grid> Source="Icons/placeholder.png"-->
+                                <Grid>
+                                    <Image Source="Icons/Placeholder.png"  Height="80" Width="80"/>
+                                    <Image Source="{Binding Path=Charity_Logo}"  Height="100" Width="100"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Charity_Name}" Width="400" FontSize="20"/>
+                                    <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding Charity_Description}" Width="400" FontSize="10"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
